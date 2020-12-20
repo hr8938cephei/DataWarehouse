@@ -5,7 +5,10 @@ spring:
     password: your_password
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     database: mysql
     show-sql: true
+
+server:
+  port: 8083

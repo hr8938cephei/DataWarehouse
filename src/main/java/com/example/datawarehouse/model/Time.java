@@ -17,9 +17,17 @@ public class Time {
 
     private Integer year;
 
+    private Integer season;
+
     private Integer month;
 
     private Integer day;
 
-    private Integer season;
+    private Integer yearCount;
+
+    private Integer seasonCount;
+
+    private Integer monthCount;
+
+    private Integer dayCount;
 }

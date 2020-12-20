@@ -3,8 +3,6 @@ package com.example.datawarehouse.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
@@ -12,10 +10,7 @@ import javax.persistence.Id;
 public class PositiveNegativeScore {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private Double score;
+    private Integer score;
 
     private Integer count;
 }

@@ -12,7 +12,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long reviewId;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -24,13 +24,9 @@ public class Review {
 
     private Integer downVote;
 
-    private Double score;
+    private Integer score;
+
+    private Double positiveNegativeScore;
 
     private Long timeStamp;
-
-    @Lob
-    private String summary;
-
-    @Lob
-    private String text;
 }
