@@ -9,12 +9,12 @@ import javax.validation.constraints.Min;
 
 @Data
 @Entity
-public class Score {
+public class EmotionScore {
 
     @Id
     @Min(0)
     @Max(500)
-    private Integer score;
+    private Integer emotionScore;
 
     @Min(0)
     private Integer movieCount;

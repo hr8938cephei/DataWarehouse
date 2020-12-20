@@ -4,21 +4,33 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Size;
 
 @Data
-@EqualsAndHashCode(exclude = { "time", "score", "positiveNegativeScore" })
+@EqualsAndHashCode(exclude = { "time", "score", "emotionScore" })
 @Entity
 public class Movie {
 
     @Id
+    @Column(length = 12)
+    @Size(max = 12)
     private String productId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    private String title;
+
+    @Min(0)
+    private Integer versionCount;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "time_id")
     private Time time;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "score")
     private Score score;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private PositiveNegativeScore positiveNegativeScore;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "emotion_score")
+    private EmotionScore emotionScore;
 }
