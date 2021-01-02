@@ -7,26 +7,47 @@ import com.example.datawarehouse.pojo.ScoreCount;
 import com.example.datawarehouse.service.MovieService;
 import com.example.datawarehouse.utils.TimeWrapper;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/v1/mysql")
+@RestController
+@RequestMapping("/api/v1/mysql")
 @AllArgsConstructor
 public class MovieController {
 
     private final MovieService movieService;
 
-    @GetMapping("analysis/time")
+    @GetMapping("analysis/time/year")
     @ResponseBody
-    public TimeWrapper<Integer> countByTime(
-            @RequestParam("startTime") String startTimeStr,
-            @RequestParam("endTime") String endTimeStr
+    public TimeWrapper<Integer> countByYear(
+            @RequestParam("time") String timeStr
     ) {
-        return movieService.countByTime(new QueryByTimeDto(startTimeStr, endTimeStr));
+        return movieService.countByTime(new QueryByTimeDto(TimeGranularity.YEAR, timeStr));
+    }
+
+    @GetMapping("analysis/time/season")
+    @ResponseBody
+    public TimeWrapper<Integer> countBySeason(
+            @RequestParam("time") String timeStr
+    ) {
+        return movieService.countByTime(new QueryByTimeDto(TimeGranularity.SEASON, timeStr));
+    }
+
+    @GetMapping("analysis/time/month")
+    @ResponseBody
+    public TimeWrapper<Integer> countByMonth(
+            @RequestParam("time") String timeStr
+    ) {
+        return movieService.countByTime(new QueryByTimeDto(TimeGranularity.MONTH, timeStr));
+    }
+
+    @GetMapping("analysis/time/day")
+    @ResponseBody
+    public TimeWrapper<Integer> countByDay(
+            @RequestParam("time") String timeStr
+    ) {
+        return movieService.countByTime(new QueryByTimeDto(TimeGranularity.DAY, timeStr));
     }
 
     @GetMapping("getMovie/title")

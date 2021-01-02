@@ -17,7 +17,7 @@ public interface MovieRepo extends CrudRepository<Movie, String>, MovieRepoMetho
     List<Movie> findByActorName(@Param("actorName") String actorName, @Param("limit") Integer limit);
 
     @Query(
-            value = "select m.* from director_movie dm natural join movie m dm.director_name = :directorName limit :limit",
+            value = "select m.* from director_movie dm natural join movie m where dm.director_name = :directorName limit :limit",
             nativeQuery = true
     )
     List<Movie> findByDirectorName(@Param("directorName") String directorName, @Param("limit") Integer limit);

@@ -95,13 +95,13 @@ public class MovieService {
         timeAccumulator.start();
         if (queryByCollaborateDto.getRole1() == Role.ACTOR) {
             if (queryByCollaborateDto.getRole2() == Role.DIRECTOR) {
-                iNameCountList = actorMovieRepo.getCollaborateWithDirector(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
+                iNameCountList = directorMovieRepo.getCollaborateWithActor(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
             } else {
                 iNameCountList = actorMovieRepo.getCollaborateWithActor(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
             }
         } else {
             if (queryByCollaborateDto.getRole2() == Role.ACTOR) {
-                iNameCountList = directorMovieRepo.getCollaborateWithActor(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
+                iNameCountList = actorMovieRepo.getCollaborateWithDirector(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
             } else {
                 iNameCountList = directorMovieRepo.getCollaborateWithDirector(queryByCollaborateDto.getName(), queryByCollaborateDto.getLimit());
             }

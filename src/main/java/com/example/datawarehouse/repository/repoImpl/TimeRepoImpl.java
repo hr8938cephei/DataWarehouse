@@ -12,13 +12,28 @@ public class TimeRepoImpl implements TimeRepoMethods {
 
     @Override
     public Integer countByTime(QueryByTimeDto queryByTimeDto) {
-        return timeRepo.countByTime(
-                queryByTimeDto.getStartYear(),
-                queryByTimeDto.getStartMonth(),
-                queryByTimeDto.getStartDay(),
-                queryByTimeDto.getEndYear(),
-                queryByTimeDto.getEndMonth(),
-                queryByTimeDto.getEndDay()
-        );
+        Integer result;
+        switch (queryByTimeDto.getTimeGranularity()) {
+            case DAY:
+                result = timeRepo.countByDay(queryByTimeDto.getYear(), queryByTimeDto.getMonth(), queryByTimeDto.getDay());
+                break;
+            case MONTH:
+                result = timeRepo.countByMonth(queryByTimeDto.getYear(), queryByTimeDto.getMonth());
+                break;
+            case SEASON:
+                result = timeRepo.countBySeason(queryByTimeDto.getYear(), queryByTimeDto.getSeason());
+                break;
+            default:
+                result = timeRepo.countByYear(queryByTimeDto.getYear());
+                break;
+        }
+
+        System.out.println(result);
+
+        if (result == null) {
+            result = 0;
+        }
+
+        return result;
     }
 }
